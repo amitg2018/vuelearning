@@ -107,6 +107,9 @@ export default {
         const update = await updateData.json()
         console.log('CheCCCCCCKKKKKK===== ', update)
         this.todoList.splice(this.getindex -1, 1, update);
+        this.createBtn = false
+        this.form.title = ''
+        this.form.description =''
       }
     },
     
