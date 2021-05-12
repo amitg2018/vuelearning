@@ -27,7 +27,7 @@
         <h1>{{ todo.id }} - {{ todo.title }}</h1>
         <p>{{ todo.body }}</p>
         <el-link type="primary" style="margin-right: 10px;" @click="editData(todo)">edit</el-link>
-        <el-link @click="deleteData()">delete</el-link>
+        <el-link @click="deleteData(todo)">delete</el-link>
       </div>
     </div>
   </div>
@@ -59,6 +59,7 @@ export default {
   },
 
   methods: {
+    // GET Post Api Data
     async todoListFetch () {
       const postData = await fetch('https://jsonplaceholder.typicode.com/posts')
       const dataResponse = await postData.json()
@@ -68,6 +69,7 @@ export default {
       // document.getElementById('dataShow').innerHTML = showAll
     },
     
+    // Submit Data and Update Data to Api
     async submitData(type) {
       if( type === 'create') {
         alert('Create')
@@ -90,7 +92,6 @@ export default {
         // here for update data
         this.createBtn = true
         console.log('Index==== ', this.getindex)
-
         const updateData = await fetch(`https://jsonplaceholder.typicode.com/posts/${this.getindex}`, {
           method: 'PUT',
           body: JSON.stringify({
@@ -112,7 +113,23 @@ export default {
         this.form.description =''
       }
     },
+
+    // Delete Api Data
+    async deleteData(todo) {
+      try {
+        const deleteTodo = await fetch(`https://jsonplaceholder.typicode.com/posts/${todo.id}`, {
+        method: 'DELETE',
+        });
+       
+       console.log('Delete Data ===== ', deleteTodo)
+       this.todoList.splice(deleteTodo-1, 1);
+       console.log('Delete index ===== ', todo.id)
+        } catch(err){
+        console.log('ERROR SHOW === ', err.message)
+      }
+    },
     
+    // EDIT Api Data
     editData(todo) {
     //console.log('Update data')
     console.log('Check Click ID=== ', todo.id )
@@ -124,6 +141,7 @@ export default {
       this.getindex = todo.id
     },
 
+    // Cancel create and Update form Data
     cancel(type) {
       if(type === 'create') {
         // console.log('create Cancel');
@@ -140,11 +158,6 @@ export default {
         this.createBtn = false
       }
 
-    },
-
-    async deleteData() {
-      console.log('Delete Data')
-      
     }
   }
 };
