@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
+    <img alt="Vue logo" src="../assets/logo.png" style="margin-bottom: 30px; height: 81px"/>
     <!-- <HelloWorld msg="Welcome to Your Vue.js App" /> -->
     <div class="create-form">
       <el-form ref="form" :model="form" label-width="120px">
@@ -26,8 +26,8 @@
       <div class="dataShow" v-for="todo in todoList" :key="todo.id">
         <h1>{{ todo.id }} - {{ todo.title }}</h1>
         <p>{{ todo.body }}</p>
-        <el-link type="primary" style="margin-right: 10px;" @click="editData(todo)">edit</el-link>
-        <el-link @click="deleteData(todo)">delete</el-link>
+        <el-link type="primary" style="margin-right: 10px;" @click="editData(todo)">Edit</el-link>
+        <el-link @click="deleteData(todo)">Delete</el-link>
       </div>
     </div>
   </div>
@@ -163,6 +163,18 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+/deep/ .el-button--primary {
+    color: #FFF;
+    background-color: #41b883;
+    border-color: #41b883;
+}
+/deep/ .el-link.el-link--primary {
+    color: #41b883;
+}
+.create-form {
+  margin: 0 auto;
+  width: 50%;
+}
 .todo-list-data {
   margin: 0;
   padding: 0;
@@ -175,7 +187,7 @@ export default {
     margin: 0;
     padding: 0;
     list-style: none;
-    border: 1px solid #e2e2e2;
+    border: 1px solid #41b883;
     flex-direction: column;
     width: 30%;
     h1 {
