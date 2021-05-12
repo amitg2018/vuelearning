@@ -44,6 +44,7 @@ export default {
   },
   data() {
     return {
+      getindex: '',
       createBtn: false,
       todoList: [],
       form: {
@@ -86,18 +87,38 @@ export default {
         this.form.title = ''
         this.form.description =''
       } else {
+        // here for update data
         this.createBtn = true
-        alert('update')
+        console.log('Index==== ', this.getindex)
+
+        const updateData = await fetch(`https://jsonplaceholder.typicode.com/posts/${this.getindex}`, {
+          method: 'PUT',
+          body: JSON.stringify({
+            id: this.getindex,
+            title: this.form.title,
+            body: this.form.description,
+            userId: this.getindex,
+          }),
+          headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+          },
+        })
+        console.log('AAAAACheCCCCCCKKKKKK===== ', updateData)
+        const update = await updateData.json()
+        console.log('CheCCCCCCKKKKKK===== ', update)
+        this.todoList.splice(this.getindex -1, 1, update);
       }
     },
     
     editData(todo) {
     //console.log('Update data')
+    console.log('Check Click ID=== ', todo.id )
     this.createBtn = true
       this.form = {
         title: todo.title,
         description: todo.body
       }
+      this.getindex = todo.id
     },
 
     cancel(type) {
