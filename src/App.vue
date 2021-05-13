@@ -1,8 +1,9 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">API Call- Fetch</router-link> |
-      <router-link to="/about">API Call - Axios</router-link>
+      <router-link to="/home">API Call- Fetch</router-link> |
+      <router-link to="/about">API Call - Axios</router-link> | 
+      <router-link to="/apiCall">API Call</router-link>
     </div>
     <router-view />
   </div>
