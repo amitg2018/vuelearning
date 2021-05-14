@@ -1,35 +1,6 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" style="margin-bottom: 30px; height: 81px"/>
-    <!-- <HelloWorld msg="Welcome to Your Vue.js App" /> -->
-    <div class="create-form">
-      <el-form ref="form" :model="form" label-width="120px">
-        <el-form-item label="Title">
-          <el-input v-model="form.title"></el-input>
-        </el-form-item>
-        <el-form-item label="Description">
-          <el-input type="textarea" v-model="form.description"></el-input>
-        </el-form-item>
-        <el-form-item>
-          <div v-if="createBtn">
-          <el-button type="primary" @click="submitData('update')">Update</el-button>
-          <el-button @click="cancel('update')">Cancel</el-button>
-          </div>
-          <div v-else>
-          <el-button type="primary" @click="submitData('create')">Create</el-button>
-          <el-button @click="cancel('create')">Cancel</el-button>
-          </div>
-        </el-form-item>
-      </el-form>
-    </div>
-    <div class="todo-list-data">
-      <div class="dataShow" v-for="todo in todoList" :key="todo.id">
-        <h1>{{ todo.id }} - {{ todo.title }}</h1>
-        <p>{{ todo.body }}</p>
-        <el-link type="primary" style="margin-right: 10px;" @click="editData(todo)">Edit</el-link>
-        <el-link @click="deleteData(todo)">Delete</el-link>
-      </div>
-    </div>
+    Home Page...
   </div>
 </template>
 

@@ -3,6 +3,8 @@ import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
 import About from '../views/About.vue';
 import ApiCall from '../views/apiCall/index.vue'
+import ApiCallAxiosSingle from '../views/apiCall/views/AxiosSingle.vue'
+import ApiCallFetchSingle from '../views/apiCall/views/FetchSingle.vue'
 import ApiCallAxios from '../views/apiCall/views/Axioscall.vue'
 import ApiCallFetch from '../views/apiCall/views/FetchCall.vue'
 
@@ -26,7 +28,7 @@ const routes = [
     children: [
       {
         path: '',
-        redirect: '/fetch',
+        redirect: '/fetchSingle',
       },
       {
         path: '/fetch',
@@ -37,6 +39,16 @@ const routes = [
         path: '/axios',
         component: ApiCallAxios,
         name: 'AxiosApiCall',
+      },
+      {
+        path: '/fetchSingle',
+        component: ApiCallFetchSingle,
+        name: 'FetchComponent',
+      },
+      {
+        path: '/axiosSingle',
+        component: ApiCallAxiosSingle,
+        name: 'AxiosComponent',
       },
     ]
   },

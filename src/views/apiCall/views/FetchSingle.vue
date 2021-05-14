@@ -1,8 +1,9 @@
 <template>
-  <div class="about">
-    About Us Page...
-    <!-- <img alt="Axios logo" src="../assets/axios.png"  width="200" style="margin-bottom: 30px;"/>
+  <div class="home">
+    <img alt="Vue logo" src="../../../assets/logo.png" style="margin-bottom: 30px; height: 81px"/>
+    <!-- <HelloWorld msg="Welcome to Your Vue.js App" /> -->
     <div class="create-form">
+      FETCH
       <el-form ref="form" :model="form" label-width="120px">
         <el-form-item label="Title">
           <el-input v-model="form.title"></el-input>
@@ -26,21 +27,17 @@
       <div class="dataShow" v-for="todo in todoList" :key="todo.id">
         <h1>{{ todo.id }} - {{ todo.title }}</h1>
         <p>{{ todo.body }}</p>
-        <el-link type="primary" style="margin-right: 10px;" @click="editData(todo)">Edit</el-link> 
+        <el-link type="primary" style="margin-right: 10px;" @click="editData(todo)">Edit</el-link>
         <el-link @click="deleteData(todo)">Delete</el-link>
       </div>
-    </div> -->
+    </div>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-// https://jsonplaceholder.typicode.com/guide/
-// https://github.com/axios/axios
-// https://jasonwatmore.com/post/2020/07/23/vue-axios-http-post-request-examples
-// https://www.digitalocean.com/community/tutorials/vuejs-rest-api-axios
 // import HelloWorld from "@/components/HelloWorld.vue";
-import axios from 'axios';
+
 export default {
   name: "Home",
   components: {
@@ -63,39 +60,47 @@ export default {
   },
 
   methods: {
-    // GET Api Data
+    // GET Post Api Data
     async todoListFetch () {
-      try {
-        const postData = await axios.get('https://jsonplaceholder.typicode.com/posts')
-        this.todoList = postData.data;
-      } catch (err) {
-        console.log(err.message)
-      }
+      const postData = await fetch('https://jsonplaceholder.typicode.com/posts')
+      const dataResponse = await postData.json()
+      this.todoList = dataResponse;
     },
     
     // Submit Data and Update Data to Api
     async submitData(type) {
       if( type === 'create') {
-        const addData = {
-          title: this.form.title,
-          body: this.form.description,
-        }
-        const datasend = await axios.post('https://jsonplaceholder.typicode.com/posts', addData)
-        const datapost = await datasend.data
+        const datasend = await fetch('https://jsonplaceholder.typicode.com/posts', {
+          method: 'POST',
+          body: JSON.stringify({
+            title: this.form.title,
+            body: this.form.description,
+            userId: 1
+          }),
+          headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+          },
+        })
+        const datapost = await datasend.json()
         this.todoList.push(datapost)
         this.form.title = ''
         this.form.description =''
       } else {
         // here for update data
         this.createBtn = true
-        const updateitem = {
-          id: this.getindex,
-          title: this.form.title,
-          body: this.form.description,
-          userId: this.getindex,
-        }
-        const updateData = await axios.put(`https://jsonplaceholder.typicode.com/posts/${this.getindex}`, updateitem)
-        const update = updateData.data
+        const updateData = await fetch(`https://jsonplaceholder.typicode.com/posts/${this.getindex}`, {
+          method: 'PUT',
+          body: JSON.stringify({
+            id: this.getindex,
+            title: this.form.title,
+            body: this.form.description,
+            userId: this.getindex,
+          }),
+          headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+          },
+        })
+        const update = await updateData.json()
         this.todoList.splice(this.getindex -1, 1, update);
         this.createBtn = false
         this.form.title = ''
@@ -106,8 +111,10 @@ export default {
     // Delete Api Data
     async deleteData(todo) {
       try {
-        await axios.delete(`https://jsonplaceholder.typicode.com/posts/${todo.id}`);
-        this.todoList.splice(todo.id-1, 1);
+        await fetch(`https://jsonplaceholder.typicode.com/posts/${todo.id}`, {
+        method: 'DELETE',
+        });
+       this.todoList.splice(todo.id-1, 1);
       } catch(err){
         console.log('ERROR SHOW === ', err.message)
       }
@@ -145,11 +152,11 @@ export default {
 <style lang="scss" scoped>
 /deep/ .el-button--primary {
     color: #FFF;
-    background-color: #854196;
-    border-color: #854196;
+    background-color: #41b883;
+    border-color: #41b883;
 }
 /deep/ .el-link.el-link--primary {
-    color: #854196;
+    color: #41b883;
 }
 .create-form {
   margin: 0 auto;
@@ -167,7 +174,7 @@ export default {
     margin: 0;
     padding: 0;
     list-style: none;
-    border: 1px solid #854196;
+    border: 1px solid #41b883;
     flex-direction: column;
     width: 30%;
     h1 {

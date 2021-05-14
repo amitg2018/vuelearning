@@ -1,8 +1,8 @@
 <template>
   <div class="about">
-    About Us Page...
-    <!-- <img alt="Axios logo" src="../assets/axios.png"  width="200" style="margin-bottom: 30px;"/>
+    <img alt="Axios logo" src="../../../assets/axios.png"  width="200" style="margin-bottom: 30px;"/>
     <div class="create-form">
+      AXIOS
       <el-form ref="form" :model="form" label-width="120px">
         <el-form-item label="Title">
           <el-input v-model="form.title"></el-input>
@@ -29,7 +29,7 @@
         <el-link type="primary" style="margin-right: 10px;" @click="editData(todo)">Edit</el-link> 
         <el-link @click="deleteData(todo)">Delete</el-link>
       </div>
-    </div> -->
+    </div>
   </div>
 </template>
 

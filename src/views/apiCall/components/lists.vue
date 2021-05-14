@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div> 
+    <h4>Check All Details</h4>
     <div class="todo-list-data">
       <div class="dataShow" v-for="item in getItems" :key="item.id">
         <h1>{{ item.id }} - {{ item.title }}</h1>
