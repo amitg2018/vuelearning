@@ -64,15 +64,11 @@ export default {
       const postData = await fetch('https://jsonplaceholder.typicode.com/posts')
       const dataResponse = await postData.json()
       this.todoList = dataResponse;
-      // console.log('===============>', postData)
-      console.log('*************', dataResponse)
-      // document.getElementById('dataShow').innerHTML = showAll
     },
     
     // Submit Data and Update Data to Api
     async submitData(type) {
       if( type === 'create') {
-        alert('Create')
         const datasend = await fetch('https://jsonplaceholder.typicode.com/posts', {
           method: 'POST',
           body: JSON.stringify({
@@ -91,7 +87,6 @@ export default {
       } else {
         // here for update data
         this.createBtn = true
-        console.log('Index==== ', this.getindex)
         const updateData = await fetch(`https://jsonplaceholder.typicode.com/posts/${this.getindex}`, {
           method: 'PUT',
           body: JSON.stringify({
@@ -104,9 +99,7 @@ export default {
             'Content-type': 'application/json; charset=UTF-8',
           },
         })
-        console.log('AAAAACheCCCCCCKKKKKK===== ', updateData)
         const update = await updateData.json()
-        console.log('CheCCCCCCKKKKKK===== ', update)
         this.todoList.splice(this.getindex -1, 1, update);
         this.createBtn = false
         this.form.title = ''
@@ -117,22 +110,17 @@ export default {
     // Delete Api Data
     async deleteData(todo) {
       try {
-        const deleteTodo = await fetch(`https://jsonplaceholder.typicode.com/posts/${todo.id}`, {
+        await fetch(`https://jsonplaceholder.typicode.com/posts/${todo.id}`, {
         method: 'DELETE',
         });
-       
-       console.log('Delete Data ===== ', deleteTodo)
-       this.todoList.splice(deleteTodo-1, 1);
-       console.log('Delete index ===== ', todo.id)
-        } catch(err){
+       this.todoList.splice(todo.id-1, 1);
+      } catch(err){
         console.log('ERROR SHOW === ', err.message)
       }
     },
     
     // EDIT Api Data
     editData(todo) {
-    //console.log('Update data')
-    console.log('Check Click ID=== ', todo.id )
     this.createBtn = true
       this.form = {
         title: todo.title,
@@ -144,13 +132,11 @@ export default {
     // Cancel create and Update form Data
     cancel(type) {
       if(type === 'create') {
-        // console.log('create Cancel');
         this.form = {
           title: '',
           description: ''
         }
       } else {
-        // console.log('update cancel')
         this.form = {
           title: '',
           description: ''

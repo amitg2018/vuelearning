@@ -44,6 +44,10 @@ const routes = [
     path: '',
     redirect: '/home'
   }
+  // {
+  //   path: '',
+  //   redirect: '/apiCall'
+  // }
 ];
 
 

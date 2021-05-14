@@ -67,7 +67,6 @@ export default {
       try {
         const postData = await axios.get('https://jsonplaceholder.typicode.com/posts')
         this.todoList = postData.data;
-        console.log('===============>', this.todoList)
       } catch (err) {
         console.log(err.message)
       }
@@ -77,8 +76,8 @@ export default {
     async submitData(type) {
       if( type === 'create') {
         const addData = {
-            title: this.form.title,
-            body: this.form.description,
+          title: this.form.title,
+          body: this.form.description,
         }
         const datasend = await axios.post('https://jsonplaceholder.typicode.com/posts', addData)
         const datapost = await datasend.data
@@ -89,16 +88,13 @@ export default {
         // here for update data
         this.createBtn = true
         const updateitem = {
-            id: this.getindex,
-            title: this.form.title,
-            body: this.form.description,
-            userId: this.getindex,
-          }
-        console.log('Index==== ', this.getindex)
+          id: this.getindex,
+          title: this.form.title,
+          body: this.form.description,
+          userId: this.getindex,
+        }
         const updateData = await axios.put(`https://jsonplaceholder.typicode.com/posts/${this.getindex}`, updateitem)
-        console.log('AAAAACheCCCCCCKKKKKK===== ', updateData)
         const update = updateData.data
-        console.log('CheCCCCCCKKKKKK===== ', update)
         this.todoList.splice(this.getindex -1, 1, update);
         this.createBtn = false
         this.form.title = ''
@@ -109,19 +105,15 @@ export default {
     // Delete Api Data
     async deleteData(todo) {
       try {
-        const deleteTodo = await axios.delete(`https://jsonplaceholder.typicode.com/posts/${todo.id}`);
-        console.log('Delete Data ===== ', deleteTodo)
-       this.todoList.splice(deleteTodo-1, 1);
-       console.log('Delete index ===== ', todo.id)
-        } catch(err){
+        await axios.delete(`https://jsonplaceholder.typicode.com/posts/${todo.id}`);
+        this.todoList.splice(todo.id-1, 1);
+      } catch(err){
         console.log('ERROR SHOW === ', err.message)
       }
     },
     
     // EDIT Api Data
     editData(todo) {
-    //console.log('Update data')
-    console.log('Check Click ID=== ', todo.id )
     this.createBtn = true
       this.form = {
         title: todo.title,
@@ -133,13 +125,11 @@ export default {
     // Cancel create and Update form Data
     cancel(type) {
       if(type === 'create') {
-        // console.log('create Cancel');
         this.form = {
           title: '',
           description: ''
         }
       } else {
-        // console.log('update cancel')
         this.form = {
           title: '',
           description: ''

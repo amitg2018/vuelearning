@@ -1,58 +1,40 @@
 <template>
   <div class="home">
     <img alt="Vue logo" src="../../../assets/logo.png" style="margin-bottom: 30px; height: 81px"/>
-    <div class="create-form">
-      <el-form ref="form" :model="form" label-width="120px">
-        <el-form-item label="Title">
-          <el-input v-model="form.title"></el-input>
-        </el-form-item>
-        <el-form-item label="Description">
-          <el-input type="textarea" v-model="form.description"></el-input>
-        </el-form-item>
-        <el-form-item>
-          <div v-if="createBtn">
-          <el-button type="primary" @click="submitData('update')">Update</el-button>
-          <el-button @click="cancel('update')">Cancel</el-button>
-          </div>
-          <div v-else>
-          <el-button type="primary" @click="submitData('create')">Create</el-button>
-          <el-button @click="cancel('create')">Cancel</el-button>
-          </div>
-        </el-form-item>
-      </el-form>
-    </div>
-    <div class="todo-list-data">
-      <div class="dataShow" v-for="todo in todoList" :key="todo.id">
-        <h1>{{ todo.id }} - {{ todo.title }}</h1>
-        <p>{{ todo.body }}</p>
-        <el-link type="primary" style="margin-right: 10px;" @click="editData(todo)">Edit</el-link>
-        <el-link @click="deleteData(todo)">Delete</el-link>
-      </div>
-    </div>
+    <form-data
+      :getFormData="form"
+      :submit="submitData"
+      :cancel="cancel"
+      :btn="createBtn">
+      </form-data>
+    <lists
+      :getItems="todoList"
+      :deleteItem="deleteData"
+      :editItem="editData">
+    </lists>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
+import FormData from '../components/form.vue'
+import Lists from '../components/lists.vue'
 export default {
-  name: "Home",
-  components: {},
+  components: {
+    Lists,
+    FormData
+  },
   data() {
     return {
       getindex: '',
       createBtn: false,
       todoList: [],
-      form: {
-        title: '',
-        description: ''
-      }
+      form: {}
     };
   },
-
   created() {
     this.todoListFetch();
   },
-
   methods: {
     // GET Post Api Data
     async todoListFetch () {
@@ -61,7 +43,30 @@ export default {
       this.todoList = dataResponse;
     },
     
-    // Submit Data and Update Data to Api
+    // Delete Api Data
+    async deleteData(item) {
+      try {
+        await fetch(`https://jsonplaceholder.typicode.com/posts/${item.id}`, {
+        method: 'DELETE',
+        });
+       this.todoList.splice(item.id-1, 1);
+        } catch(err){
+        console.log('ERROR SHOW === ', err.message)
+      }
+    },
+    
+    // EDIT Api Data
+    editData(item) {
+      alert('HI')
+    this.createBtn = true
+      this.form = {
+        title: item.title,
+        description: item.body
+      }
+      this.getindex = item.id
+    },
+
+    // Create and Update Data
     async submitData(type) {
       if( type === 'create') {
         const datasend = await fetch('https://jsonplaceholder.typicode.com/posts', {
@@ -101,29 +106,7 @@ export default {
         this.form.description =''
       }
     },
-
-    // Delete Api Data
-    async deleteData(todo) {
-      try {
-        const deleteTodo = await fetch(`https://jsonplaceholder.typicode.com/posts/${todo.id}`, {
-        method: 'DELETE',
-        });
-       this.todoList.splice(deleteTodo-1, 1);
-        } catch(err){
-        console.log('ERROR SHOW === ', err.message)
-      }
-    },
     
-    // EDIT Api Data
-    editData(todo) {
-    this.createBtn = true
-      this.form = {
-        title: todo.title,
-        description: todo.body
-      }
-      this.getindex = todo.id
-    },
-
     // Cancel create and Update form Data
     cancel(type) {
       if(type === 'create') {
@@ -141,51 +124,7 @@ export default {
 
     }
   }
-};
+}
 </script>
 <style lang="scss" scoped>
-/deep/ .el-button--primary {
-    color: #FFF;
-    background-color: #41b883;
-    border-color: #41b883;
-}
-/deep/ .el-link.el-link--primary {
-    color: #41b883;
-}
-.create-form {
-  margin: 0 auto;
-  width: 50%;
-}
-.todo-list-data {
-  margin: 0;
-  padding: 0;
-  display: inline-flex;
-  flex-wrap: wrap;
-  width: 100%;
-  gap: 30px;
-  justify-content: center;
-  .dataShow {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    border: 1px solid #41b883;
-    flex-direction: column;
-    width: 30%;
-    h1 {
-      font-size: 16px;
-      font-weight: 600;
-      margin: 0 0 5px;
-      padding: 5px 10px;
-      background: #f2f2f2;
-    }
-    p {
-      font-size: 14px;
-      font-weight: 400;
-      line-height: 1.2;
-      margin: 0;
-      padding: 5px 10px;
-      background: #fff;
-    }
-  }
-}
 </style>
