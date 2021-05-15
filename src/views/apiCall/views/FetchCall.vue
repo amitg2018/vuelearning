@@ -17,7 +17,7 @@
 
 <script>
 // @ is an alias to /src
-import FormData from '../components/form.vue'
+import FormData from '../components/formProps.vue'
 import Lists from '../components/lists.vue'
 export default {
   components: {
@@ -60,7 +60,6 @@ export default {
     
     // EDIT Api Data
     editData(item) {
-      alert('HI')
     this.updateBtn = true
       this.form = {
         title: item.title,
@@ -72,6 +71,7 @@ export default {
     // Create and Update Data
     async submitData(type) {
       if( type === 'create') {
+        console.log('create link through Props')
         const datasend = await fetch('https://jsonplaceholder.typicode.com/posts', {
           method: 'POST',
           body: JSON.stringify({
@@ -89,6 +89,7 @@ export default {
         this.form.description =''
       } else {
         // here for update data
+        console.log('update link through Props')
         this.updateBtn = true
         const updateData = await fetch(`https://jsonplaceholder.typicode.com/posts/${this.getindex}`, {
           method: 'PUT',

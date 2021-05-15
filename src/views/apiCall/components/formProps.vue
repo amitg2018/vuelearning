@@ -1,6 +1,6 @@
 <template>
-  <div class="create-form"> 
-    <h1>Fill Details</h1>
+  <div class="create-form">
+    <h1>Fill Details - p</h1>
     <el-form ref="getFormData" :model="getFormData" label-width="120px">
       <el-form-item label="Title">
         <el-input v-model="getFormData.title"></el-input>

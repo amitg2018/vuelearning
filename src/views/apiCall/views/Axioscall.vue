@@ -3,7 +3,7 @@
     <img alt="Axios logo" src="../../../assets/axios.png"  width="200" style="margin-bottom: 30px;"/>
     <form-data
       :getFormData="form"
-      :submit="submitData"
+      @submit-data="submitData"
       :cancel="cancel"
       :btn="createBtn">
       </form-data>
@@ -18,7 +18,7 @@
 <script>
 // @ is an alias to /src
 import axios from 'axios';
-import FormData from '../components/form.vue'
+import FormData from '../components/formEmit.vue'
 import Lists from '../components/lists.vue'
 export default {
   components: {
@@ -55,6 +55,7 @@ export default {
     // Submit Data and Update Data to Api
     async submitData(type) {
       if( type === 'create') {
+        console.log('Create emit')
         const addData = {
             title: this.form.title,
             body: this.form.description,
@@ -66,6 +67,7 @@ export default {
         this.form.description =''
       } else {
         // here for update data
+         console.log('Update emit')
         this.createBtn = true
         const updateitem = {
             id: this.getindex,

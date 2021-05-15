@@ -2,8 +2,9 @@
   <div>
     <div>{{title}}</div>
     <div>{{post}}</div>
-    <el-button size="mini" @click="count++">Click Time - {{count}}</el-button>
-    <el-button @click="checkEmit">Check Emit Event</el-button>
+    <el-button size="mini" @click="count++">{{count}}</el-button>
+    <el-button size="mini" @click="checkcounter">Click Time - {{count}}</el-button>
+   
   </div>
 </template>
 <script>
@@ -24,8 +25,9 @@ export default {
   },
 
   methods: {
-    checkEmit(){
-      this.$emit('parent-click')
+    checkcounter(){
+      this.count++
+      this.$emit('parent-click', this.count)
     }
   }
   
