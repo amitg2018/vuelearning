@@ -1,120 +1,81 @@
 <template>
   <div class="home">
-    Home Page...
+    Home Page... {{text}}
+    <button-counter title="Hi" :post="post1" @parent-click="clickhere"></button-counter>
+    <button-counter title="Hello" :post="post2" @parent-click="clickhere"></button-counter>
+    <button-counter title="Namaskar" :post="post3" @parent-click="clickhere"></button-counter>
+    <hr/>
+    <blog-post :posts="posts" @changeText='TextChange($event)'>
+      <!-- Hi How r u... 
+      this content for slot if you need put content here anything please use slot for that.
+      -->
+      <!--
+      <div slot="heading">Heading through slot Name</div>
+      
+      is tarah bhi likh sakte heading Hai.. Named Slots Shorthand
+      <template #heading>Heading through slot Name</template>
+      -->
+    </blog-post>
+
+    <!-- Create Dynamic Component call -->
+    
+    <dynamic-tab></dynamic-tab>
+   
+   
   </div>
 </template>
 
 <script>
+/* $emit = but not clear
+- https://www.youtube.com/watch?v=-_Nzq2GXSaY 
+- https://www.youtube.com/watch?v=5pvG6fzkdFM
+*/
 // @ is an alias to /src
 // import HelloWorld from "@/components/HelloWorld.vue";
+import ButtonCounter from "@/components/buttonCounter.vue";
+import BlogPost from "@/components/BlogPost.vue";
+import DynamicTab from "@/components/DynamicTab.vue";
 
 export default {
   name: "Home",
   components: {
+    ButtonCounter,
+    BlogPost,
+    DynamicTab
     // HelloWorld,
   },
   data() {
     return {
-      getindex: '',
-      createBtn: false,
-      todoList: [],
-      form: {
-        title: '',
-        description: ''
-      }
+      post1: 'Hi My first Click',
+      post2: 'Hello My Second Click',
+      post3: 'Namaskar My Third Click',
+      posts: [
+        {
+        title: 'Callback',
+        description: 'The function called for every array element. Its return values are added to the new array. It takes in'
+        },
+        {
+        title: 'CurrentValue',
+        description: 'The current element being passed from the array.'
+        },
+        {
+        title: 'ThisArg',
+        description: 'Value to use as this when executing callback. By default, it is undefined.'
+        },
+        {
+        title: 'Return value',
+        description: 'Returns a new array with elements as the return values from the callback function for each element.'
+        }
+      ],   
+      text: 'Hi I Am changed from Parent'   
     };
   },
-
-  created() {
-    this.todoListFetch();
-  },
-
   methods: {
-    // GET Post Api Data
-    async todoListFetch () {
-      const postData = await fetch('https://jsonplaceholder.typicode.com/posts')
-      const dataResponse = await postData.json()
-      this.todoList = dataResponse;
+    TextChange(text) {
+      this.text = text
     },
-    
-    // Submit Data and Update Data to Api
-    async submitData(type) {
-      if( type === 'create') {
-        const datasend = await fetch('https://jsonplaceholder.typicode.com/posts', {
-          method: 'POST',
-          body: JSON.stringify({
-            title: this.form.title,
-            body: this.form.description,
-            userId: 1
-          }),
-          headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-          },
-        })
-        const datapost = await datasend.json()
-        this.todoList.push(datapost)
-        this.form.title = ''
-        this.form.description =''
-      } else {
-        // here for update data
-        this.createBtn = true
-        const updateData = await fetch(`https://jsonplaceholder.typicode.com/posts/${this.getindex}`, {
-          method: 'PUT',
-          body: JSON.stringify({
-            id: this.getindex,
-            title: this.form.title,
-            body: this.form.description,
-            userId: this.getindex,
-          }),
-          headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-          },
-        })
-        const update = await updateData.json()
-        this.todoList.splice(this.getindex -1, 1, update);
-        this.createBtn = false
-        this.form.title = ''
-        this.form.description =''
-      }
-    },
-
-    // Delete Api Data
-    async deleteData(todo) {
-      try {
-        await fetch(`https://jsonplaceholder.typicode.com/posts/${todo.id}`, {
-        method: 'DELETE',
-        });
-       this.todoList.splice(todo.id-1, 1);
-      } catch(err){
-        console.log('ERROR SHOW === ', err.message)
-      }
-    },
-    
-    // EDIT Api Data
-    editData(todo) {
-    this.createBtn = true
-      this.form = {
-        title: todo.title,
-        description: todo.body
-      }
-      this.getindex = todo.id
-    },
-
-    // Cancel create and Update form Data
-    cancel(type) {
-      if(type === 'create') {
-        this.form = {
-          title: '',
-          description: ''
-        }
-      } else {
-        this.form = {
-          title: '',
-          description: ''
-        }
-        this.createBtn = false
-      }
-
+    clickhere () {
+      alert("click on child, but data from parent...")
     }
   }
 };

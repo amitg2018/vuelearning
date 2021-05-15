@@ -1,5 +1,5 @@
 <template>
-  <div class="create-form">
+  <div class="create-form"> 
     <h1>Fill Details</h1>
     <el-form ref="getFormData" :model="getFormData" label-width="120px">
       <el-form-item label="Title">

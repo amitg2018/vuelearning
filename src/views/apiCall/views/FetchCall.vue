@@ -1,11 +1,11 @@
 <template>
-  <div class="home">
+  <div class="home"> 
     <img alt="Vue logo" src="../../../assets/logo.png" style="margin-bottom: 30px; height: 81px"/>
     <form-data
       :getFormData="form"
       :submit="submitData"
       :cancel="cancel"
-      :btn="createBtn">
+      :btn="updateBtn">
       </form-data>
     <lists
       :getItems="todoList"
@@ -27,9 +27,12 @@ export default {
   data() {
     return {
       getindex: '',
-      createBtn: false,
+      updateBtn: false,
       todoList: [],
-      form: {}
+      form: {
+        title: '',
+        description: ''
+      }
     };
   },
   created() {
@@ -58,7 +61,7 @@ export default {
     // EDIT Api Data
     editData(item) {
       alert('HI')
-    this.createBtn = true
+    this.updateBtn = true
       this.form = {
         title: item.title,
         description: item.body
@@ -86,7 +89,7 @@ export default {
         this.form.description =''
       } else {
         // here for update data
-        this.createBtn = true
+        this.updateBtn = true
         const updateData = await fetch(`https://jsonplaceholder.typicode.com/posts/${this.getindex}`, {
           method: 'PUT',
           body: JSON.stringify({
@@ -101,7 +104,7 @@ export default {
         })
         const update = await updateData.json()
         this.todoList.splice(this.getindex -1, 1, update);
-        this.createBtn = false
+        this.updateBtn = false
         this.form.title = ''
         this.form.description =''
       }
@@ -119,7 +122,7 @@ export default {
           title: '',
           description: ''
         }
-        this.createBtn = false
+        this.updateBtn = false
       }
 
     }
