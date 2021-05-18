@@ -40,7 +40,9 @@
 // https://jasonwatmore.com/post/2020/07/23/vue-axios-http-post-request-examples
 // https://www.digitalocean.com/community/tutorials/vuejs-rest-api-axios
 // import HelloWorld from "@/components/HelloWorld.vue";
-import axios from 'axios';
+// import axios from 'axios'; not required because this implement inside http-common.js file.
+// remove here axios import link use http-common.js file
+import { HTTP } from "@/http-common.js"
 export default {
   name: "Home",
   components: {
@@ -66,8 +68,29 @@ export default {
     // GET Api Data
     async todoListFetch () {
       try {
-        const postData = await axios.get('https://jsonplaceholder.typicode.com/posts')
+        const postData = await HTTP.get('posts')
         this.todoList = postData.data;
+        /* 
+        if you want only few data show then use param object this is first option 
+        =========================================================================
+        const postData = await HTTP.get('posts', {
+        params: {
+          _limit: 30
+        }
+        })
+        */
+        /* 
+        if you want only few data show then use param object this is Second option 
+        =========================================================================
+        const postData = await HTTP.get('posts/?_limit=15')
+        */
+        
+       /*
+       if you want only few data show then use param object this is Third option 
+        =========================================================================
+        this.todoList.length = 20
+      */
+
       } catch (err) {
         console.log(err.message)
       }
@@ -80,7 +103,7 @@ export default {
           title: this.form.title,
           body: this.form.description,
         }
-        const datasend = await axios.post('https://jsonplaceholder.typicode.com/posts', addData)
+        const datasend = await HTTP.post('posts', addData)
         const datapost = await datasend.data
         this.todoList.push(datapost)
         this.form.title = ''
@@ -94,7 +117,7 @@ export default {
           body: this.form.description,
           userId: this.getindex,
         }
-        const updateData = await axios.put(`https://jsonplaceholder.typicode.com/posts/${this.getindex}`, updateitem)
+        const updateData = await HTTP.put(`posts/${this.getindex}`, updateitem)
         const update = updateData.data
         this.todoList.splice(this.getindex -1, 1, update);
         this.createBtn = false
@@ -106,7 +129,7 @@ export default {
     // Delete Api Data
     async deleteData(todo) {
       try {
-        await axios.delete(`https://jsonplaceholder.typicode.com/posts/${todo.id}`);
+        await HTTP.delete(`posts/${todo.id}`);
         this.todoList.splice(todo.id-1, 1);
       } catch(err){
         console.log('ERROR SHOW === ', err.message)

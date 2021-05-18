@@ -9,8 +9,12 @@ Vue.use(ElementUI);
 
 Vue.config.productionTip = false;
 
+// const appBus = new Vue();
+
 new Vue({
   router,
   store,
   render: (h) => h(App),
 }).$mount("#app");
+
+// export { appBus }

@@ -4,7 +4,8 @@
       <router-link to="/home">Home</router-link> |
       <router-link to="/about">About</router-link> | 
       <router-link to="/apiCall">API Call</router-link> |
-      <router-link to="/components">Component</router-link>
+      <router-link to="/components">Component</router-link> |
+      <router-link to="/vuex">Vuex</router-link>
     </div>
     <router-view />
   </div>

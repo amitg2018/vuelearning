@@ -9,6 +9,10 @@ import ApiCallFetchSingle from '../views/apiCall/views/FetchSingle.vue'
 import ApiCallAxios from '../views/apiCall/views/Axioscall.vue'
 import ApiCallFetch from '../views/apiCall/views/FetchCall.vue'
 
+import Vuex from '../views/vuex/index.vue'
+import VuexOne from '../views/vuex/views/vuex.vue'
+import VuexTwo from '../views/vuex/views/vuexS.vue'
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -21,6 +25,27 @@ const routes = [
     path: '/about',
     name: 'About',
     component: About
+  },
+  {
+    path: '/vuex',
+    name: 'Vuex',
+    component: Vuex,
+    children: [
+      {
+        path: '',
+        redirect: '/one',
+      },
+      {
+        path: '/one',
+        component: VuexOne,
+        name: 'vuexFirst',
+      },
+      {
+        path: '/two',
+        component: VuexTwo,
+        name: 'vuexTwo',
+      },
+    ]
   },
   {
     path: '/components',
