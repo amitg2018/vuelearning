@@ -9,6 +9,13 @@ export default {
   increaseAction (context, payload) {
     context.commit('increase', payload)
   },
+  addingAction ({commit}) {
+    commit('adding')
+  },
+  removingAction ({commit}) {
+    commit('removing')
+  },
+
   login(context) {
     context.commit('setAuth', {isAuth: true})
   },
@@ -16,3 +23,4 @@ export default {
     context.commit('setAuth', {isAuth: false})
   }
 }
+

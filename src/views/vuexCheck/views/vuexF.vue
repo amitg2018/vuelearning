@@ -21,10 +21,10 @@
 <script>
 // @ is an alias to /src
 // import HelloWorld from "@/components/HelloWorld.vue";
-import VuexExample from '@/components/vuex/vuexExample'
-import Counter from '@/components/vuex/counter';
-import FavoriteValue from '@/components/vuex/FavoriteValue';
-import UserAuth from '@/components/vuex/userAuth';
+import VuexExample from '@/components/vuexF/vuexExample'
+import Counter from '@/components/vuexF/counter';
+import FavoriteValue from '@/components/vuexF/FavoriteValue';
+import UserAuth from '@/components/vuexF/userAuth';
 import { mapActions } from 'vuex';
 
 export default {

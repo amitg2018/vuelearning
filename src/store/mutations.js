@@ -1,4 +1,5 @@
 export default {
+  // Mutations always run as synchronously - means line by line
   increment(state) {
     state.counter += +1 // same as state.counter = state.counter + 1
   },
@@ -7,6 +8,14 @@ export default {
   },
   setAuth(state, payload) {
     state.isloggedin = payload.isAuth
+  },
+
+
+  adding(state) {
+    state.counting++ // same as state.counting = state.counting + 1
+  },
+  removing(state) {
+    state.counting-- // same as state.counting = state.counting - 1
   },
   
   /* =====================================================================

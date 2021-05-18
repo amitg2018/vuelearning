@@ -53,6 +53,7 @@ export default {
         method: 'DELETE',
         });
        this.todoList.splice(item.id-1, 1);
+       console.log('===== ', this.todoList)
         } catch(err){
         console.log('ERROR SHOW === ', err.message)
       }
