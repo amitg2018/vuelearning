@@ -13,10 +13,13 @@ import Vuex from '../views/vuexCheck/index.vue'
 import VuexOne from '../views/vuexCheck/views/vuexF.vue'
 import VuexTwo from '../views/vuexCheck/views/vuexS.vue'
 
+import PageNotFound from '../views/PageNotFound'
+
 Vue.use(VueRouter);
 
 const routes = [
   {
+    // path: '/home/:id',
     path: '/home',
     name: 'Home',
     component: Home
@@ -54,7 +57,6 @@ const routes = [
   },
   {
     path: '/apiCall',
-    name: 'ApiCall',
     component: ApiCall,
     children: [
       {
@@ -86,6 +88,10 @@ const routes = [
   {
     path: '',
     redirect: '/home'
+  },
+  {
+    path: '*',
+    component: PageNotFound
   }
   // {
   //   path: '',

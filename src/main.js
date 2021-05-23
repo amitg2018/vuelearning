@@ -6,10 +6,8 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 
 Vue.use(ElementUI);
-
 Vue.config.productionTip = false;
-
-// const appBus = new Vue();
+export const appBus = new Vue();
 
 new Vue({
   router,
@@ -17,4 +15,4 @@ new Vue({
   render: (h) => h(App),
 }).$mount("#app");
 
-// export { appBus }
+

@@ -55,7 +55,7 @@ export default {
     // Submit Data and Update Data to Api
     async submitData(type) {
       if( type === 'create') {
-        console.log('Create emit')
+        // alert('Create')
         const addData = {
             title: this.form.title,
             body: this.form.description,
@@ -67,7 +67,7 @@ export default {
         this.form.description =''
       } else {
         // here for update data
-         console.log('Update emit')
+         // alert('Update')
         this.createBtn = true
         const updateitem = {
             id: this.getindex,
@@ -83,6 +83,36 @@ export default {
         this.form.description =''
       }
     },
+
+    // async createData() {
+    //   alert('Create')
+    //   const addData = {
+    //       title: this.form.title,
+    //       body: this.form.description,
+    //   }
+    //   const datasend = await axios.post('https://jsonplaceholder.typicode.com/posts', addData)
+    //   const datapost = await datasend.data
+    //   this.todoList.push(datapost)
+    //   this.form.title = ''
+    //   this.form.description =''
+    // },
+    // async updateData() {
+    //   // here for update data
+    //     alert('Update')
+    //   this.createBtn = true
+    //   const updateitem = {
+    //       id: this.getindex,
+    //       title: this.form.title,
+    //       body: this.form.description,
+    //       userId: this.getindex,
+    //     }
+    //   const updateData = await axios.put(`https://jsonplaceholder.typicode.com/posts/${this.getindex}`, updateitem)
+    //   const update = updateData.data
+    //   this.todoList.splice(this.getindex -1, 1, update);
+    //   this.createBtn = false
+    //   this.form.title = ''
+    //   this.form.description =''
+    // },
 
     // Delete Api Data
     async deleteData(todo) {
