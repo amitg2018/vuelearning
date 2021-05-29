@@ -2,6 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
 import About from '../views/About.vue';
+import Udemy from '../views/Udemy.vue';
 import ComponentPractice from '../views/CompoPractice.vue';
 import ApiCall from '../views/apiCall/index.vue'
 import ApiCallAxiosSingle from '../views/apiCall/views/AxiosSingle.vue'
@@ -28,6 +29,11 @@ const routes = [
     path: '/about',
     name: 'About',
     component: About
+  },
+  {
+    path: '/udemy',
+    name: 'udemy',
+    component: Udemy
   },
   {
     path: '/vuex',
