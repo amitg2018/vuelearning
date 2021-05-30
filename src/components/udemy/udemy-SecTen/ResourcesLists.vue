@@ -1,18 +1,18 @@
 <template>
   <ul>
-    <learning-resources
+    <resource-block
       v-for="res in resources"
       :key="res.id"
       :id="res.id"
       :title="res.title"
       :description="res.description"
       :link="res.link"
-    ></learning-resources>
+    ></resource-block>
   </ul>
 </template>
 
 <script>
-import LearningResources from './LearningResources';
+import ResourceBlock from './ResourceBlock';
 export default {
   // props ki jagah inject kerna hai jo resources ko get ker sake, aur storeResources main provide method data main banana hai.
   // props: {
@@ -21,7 +21,7 @@ export default {
   //   }
   // },
   inject: ['resources'],
-  components: { LearningResources }
+  components: { ResourceBlock }
 }
 </script>
 <style scoped>

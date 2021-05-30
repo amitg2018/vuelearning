@@ -1,42 +1,42 @@
 <template>
   <div>
-    <base-card-ui>
+    <base-card>
     <base-button 
       type="default"
       size="mini"
-      @click="setSelectedTab('stored-resources')"
+      @click="setSelectedTab('resources-lists')"
       :mode="storedResButtonMode">
         Stored Resources
     </base-button>
     <base-button
       type="default"
       size="mini"
-      @click="setSelectedTab('add-resource')"
+      @click="setSelectedTab('resource-form')"
       :mode="addResButtonMode">
         Add Resource
       </base-button>
-    </base-card-ui>
+    </base-card>
     <keep-alive>
       <component :is="selectedTab"></component>
     </keep-alive>
   </div>
 </template>
 <script>
-import StoredResources from './StoredResources';
-import AddResource from './AddResource';
+import ResourcesLists from './ResourcesLists';
+import ResourceForm from './ResourceForm';
 import BaseButton from './BaseButton';
-import BaseCardUi from './BaseCardUi'
+import BaseCard from './BaseCard'
 export default {
   components: {
-    AddResource,
-    StoredResources,
+    ResourceForm,
+    ResourcesLists,
     BaseButton,
-    BaseCardUi
+    BaseCard
   },
    data() {
     return {
-      selectedTab: 'stored-resources',
-      storedResources: [
+      selectedTab: 'resources-lists',
+      ResourcesLists: [
         {
           id: 'official-guide',
           title: 'Official Guide',
@@ -54,7 +54,7 @@ export default {
   },
   provide() {
     return {
-      resources: this.storedResources,
+      resources: this.ResourcesLists,
       addResource: this.addResource,
       deleteResource: this.removeResource
     };
@@ -62,10 +62,10 @@ export default {
   computed: {
     // active aur deactive button not understand
     storedResButtonMode() {
-      return this.selectedTab === 'stored-resources' ? 'amit' : null;
+      return this.selectedTab === 'resources-lists' ? 'amit' : null;
     },
     addResButtonMode() {
-      return this.selectedTab === 'add-resource' ? 'amit' : null;
+      return this.selectedTab === 'resource-form' ? 'amit' : null;
     },
   },
   methods: {
@@ -79,20 +79,13 @@ export default {
         description: data.description,
         link: data.link
       }
-      this.storedResources.unshift(newResource);
-      this.selectedTab = 'stored-resources'
+      this.ResourcesLists.unshift(newResource);
+      this.selectedTab = 'resources-lists'
     },
     removeResource(resId) {
-      const resIndex = this.storedResources.findIndex(res => res.id === resId);
-      this.storedResources.splice(resIndex, 1);
+      const resIndex = this.ResourcesLists.findIndex(res => res.id === resId);
+      this.ResourcesLists.splice(resIndex, 1);
     }
-    // removeResource(id) {
-    //   alert(id)
-    //   // this.storedResources = this.storedResources.filter((res) => res.id !== id);
-    //   const findIndex = this.storedResources.findIndex(res => res.id === id);
-    //   this.storedResources.splice(findIndex, 1)
-    //   console.log(this.storedResources.length)
-    // }
   },
 }
 </script>

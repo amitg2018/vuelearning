@@ -1,25 +1,25 @@
 <template>
   <ul>
-    <learning-resources
+    <resource-block
       v-for="res in resources"
       :key="res.id"
       :id="res.id"
       :title="res.title"
       :description="res.description"
       :link="res.link"
-    ></learning-resources>
+    ></resource-block>
   </ul>
 </template>
 
 <script>
-import LearningResources from './LearningResources';
+import ResourceBlock from './ResourceBlock';
 export default {
   props: {
     resources: {
       type: Array
     }
   },
-  components: { LearningResources},
+  components: { ResourceBlock},
 }
 </script>
 <style scoped>

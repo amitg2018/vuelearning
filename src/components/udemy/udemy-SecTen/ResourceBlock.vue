@@ -1,6 +1,6 @@
 <template>
   <li>
-    <base-card-ui>
+    <base-card>
       <header>
         <h3>{{title}}</h3>
         <base-button size="mini" type="default" mode="amit" @click="deleteResource(id)"><img src="../../../assets/logo.png" style="max-width: 12px;"> Delete</base-button>
@@ -9,16 +9,16 @@
       <nav>
         <a :href="link" target="_blank">View Resource</a>
       </nav>
-    </base-card-ui>
+    </base-card>
   </li>
 </template>
 <script>
 
-import BaseCardUi from './BaseCardUi'
+import BaseCard from './BaseCard'
 import BaseButton from './BaseButton'
 export default {
   components: {
-    BaseCardUi,
+    BaseCard,
     BaseButton
   },
   props: ['id', 'title', 'description', 'link'],

@@ -7,7 +7,7 @@
       <base-button type="primary" size="mini" @click="closedModal">OK</base-button>
     </div>
     </base-dialog>
-    <base-card-ui>
+    <base-card>
       <el-form
         :label-position="labelPosition"
         label-width="100px"
@@ -24,17 +24,17 @@
         </el-form-item>
         <base-button type="primary" size="mini" @click="submitData">Submit</base-button>
     </el-form>
-    </base-card-ui>
+    </base-card>
   </div>
 </template>
 <script>
 import BaseButton from './BaseButton';
-import BaseCardUi from './BaseCardUi'
+import BaseCard from './BaseCard'
 import BaseDialog from './BaseDialog'
 export default {
   inject: ['addResource'],
   components: {
-    BaseCardUi,
+    BaseCard,
     BaseButton,
     BaseDialog
   },

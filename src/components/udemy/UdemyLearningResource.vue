@@ -1,30 +1,34 @@
 <template>
   <div>
-    <the-border>
-    <the-header title="Remember Me"></the-header>
-    <!-- <stored-resources :resources="storedResources"></stored-resources> -->
-    <the-resources></the-resources>
-    </the-border>
+    <base-border>
+    <base-header title="Remember Me"></base-header>
+    <tabs-n-resources></tabs-n-resources>
+    <!-- <resources-lists :resources="ResourcesLists"></resources-lists> -->
+    </base-border>
   </div>
 </template>
 
 <script>
-import TheHeader from '../../components/udemy/udemy-SecTen/TheHeader';
+import BaseHeader from '../../components/udemy/udemy-SecTen/BaseHeader';
+import BaseBorder from './udemy-SecTen/BaseBorder.vue';
+import TabsNResources from './udemy-SecTen/TabsNResources.vue';
+
 // ab yahan StoredResources component ki requirment nahi hai kyoki ab ye dynamic tabs ke through load hoga, but problem is that ki resources props kaise work karega ya hume use karna hai main ek copy ker li hai is component ki baad main compare ker lenge.
-// import StoredResources from '../components/udemy/learning-resources/StoredResources';
-import TheBorder from '../../components/udemy/udemy-SecTen/TheBorder.vue';
-import TheResources from '../../components/udemy/udemy-SecTen/TheResources.vue';
+
+// import ResourcesLists from '../components/udemy/learning-resources/ResourcesLists';
+
 export default {
   components: {
-    // StoredResources, 
-    TheHeader, 
-    TheBorder,
-    TheResources
+    BaseHeader, 
+    BaseBorder,
+    TabsNResources
+    // ResourcesLists, 
+   
     },
   data () {
     return {
-      // yahan se hata ke TheResources component main put ker rahe hai
-      // storedResources: [
+      // yahan se hata ke tabsNResources component main put ker rahe hai
+      // ResourcesLists: [
       //   {
       //     id: 'official-guide',
       //     title: 'Vue Js',
@@ -38,10 +42,7 @@ export default {
       //   }
       // ]
     }
-  },
-  created() {
-  },
-  methods: {}
+  }
 };
 </script>
 <style scoped>

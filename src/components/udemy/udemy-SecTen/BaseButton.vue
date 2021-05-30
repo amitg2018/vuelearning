@@ -16,6 +16,7 @@ export default {
 }
 </script>
 <style scoped>
+/* ye style parent main base-button ke component main mode ke thorugh call hongi. - (amit, sumit and any other which you want.) */
 .amit{
   border: 1px solid black;
 }
