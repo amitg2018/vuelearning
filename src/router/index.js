@@ -15,6 +15,7 @@ import VuexOne from '../views/vuexCheck/views/vuexF.vue'
 import VuexTwo from '../views/vuexCheck/views/vuexS.vue'
 
 import PageNotFound from '../views/PageNotFound'
+import Notes from '../views/Notes'
 
 Vue.use(VueRouter);
 
@@ -23,12 +24,13 @@ const routes = [
     // path: '/home/:id',
     path: '/home',
     name: 'Home',
-    component: Home
+    component: Home,
+    // alias: '/' alias ka bhi use ker sakte hai agar kisi ne sirf domain dala to hemesha home per hi aagea ya jis bhi page pe kerna hai wahan ise implement ker do.
   },
   {
     path: '/about',
     name: 'About',
-    component: About
+    components: { default: About, footer: Notes} // multiple component calling
   },
   {
     path: '/udemy',
@@ -99,6 +101,12 @@ const routes = [
     path: '*',
     component: PageNotFound
   }
+  /*{
+    is tarah bhi ker sakte hai page not found ki jahan home ko bhi redirect key main daal sakte hai
+    path: '/:notFound(.*)',
+    component: PageNotFound
+  }
+  */
   // {
   //   path: '',
   //   redirect: '/apiCall'
@@ -112,6 +120,7 @@ const routes = [
 const router = new VueRouter({
   mode: 'history',
   routes,
+  linkActiveClass: 'active'
 });
 
 export default router;

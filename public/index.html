@@ -6,12 +6,32 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <title><%= htmlWebpackPlugin.options.title %></title>
+    <!-- <meta name="google-signin-client_id" content="893373568774-4n0lrk11sup8d66t5nctolhsj3oq89no.apps.googleusercontent.com"> -->
   </head>
   <body>
     <noscript>
       <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
+    <!-- <button onclick="signOut()">SignOut</button> 
+    Hi i Am show after signin ......-->
     <div id="app"></div>
     <!-- built files will be auto injected -->
+    <!-- <script>
+    function signOut() {
+      var auth2 = gapi.auth2.getAuthInstance();
+      auth2.signOut().then(function () {
+        auth2.disconnect();
+        console.log('User signed out.');
+        window.location= "google-sign-in.html"
+      });
+    }
+
+    function onLoad() {
+      gapi.load('auth2', function() {
+        gapi.auth2.init();
+      });
+    }
+    </script> -->
+     <!-- <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script> -->
   </body>
 </html>

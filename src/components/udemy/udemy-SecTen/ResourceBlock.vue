@@ -9,6 +9,8 @@
       <nav>
         <a :href="link" target="_blank">View Resource</a>
       </nav>
+      {{num}}
+      <check-provide-inject></check-provide-inject>
     </base-card>
   </li>
 </template>
@@ -16,10 +18,12 @@
 
 import BaseCard from './BaseCard'
 import BaseButton from './BaseButton'
+import CheckProvideInject from './CheckProvideInject'
 export default {
   components: {
     BaseCard,
-    BaseButton
+    BaseButton,
+    CheckProvideInject
   },
   props: ['id', 'title', 'description', 'link'],
   // props: {
@@ -40,7 +44,22 @@ export default {
   //     required: true
   //   }
   // },
+  data() {
+    return {
+      num: 0
+    }
+  },
   inject: ['deleteResource'],
+  provide() {
+    return {
+      information: this.info
+    }
+  },
+  methods: {
+    info () {
+      this.num++
+    }
+  }
 }
 </script>
 <style scoped>

@@ -2,18 +2,21 @@
   <div id="app">
     <div id="nav">
       <!-- <router-link :to="{name: 'Home', params: {id: 123}}">Home</router-link> | -->
-      <router-link :to="{name: 'Home'}" class="active">Home</router-link> |
+      <!-- <router-link :to="{name: 'Home'}" class="active">Home</router-link> | -->
+      <router-link to="/home">Home</router-link> |
       <router-link to="/about">About</router-link> | 
       <router-link to="/apiCall">API Call</router-link> |
       <router-link to="/components">Component</router-link> |
       <router-link to="/vuex">Vuex</router-link> | 
       <router-link to="/udemy">Udemy</router-link>
     </div>
-    <router-view />
+    <router-view></router-view>
+
+    <router-view name="footer"></router-view>
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -33,10 +36,10 @@
 #nav a.active
 { color: #42b983;}
 
-#nav a.router-link-exact-active {
-  color: #42b983;
-} 
-#nav a.router-link-active {
+// .router-link-exact-active {
+//   color: #42b983;
+// } 
+a.router-link-active {
   color: #42b983;
 }
 
