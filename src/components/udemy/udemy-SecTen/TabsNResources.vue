@@ -15,6 +15,20 @@
       :mode="addResButtonMode">
         Add Resource
       </base-button>
+      <base-button
+      type="default"
+      size="mini"
+      @click="setSelectedTab('props-parent')"
+      :mode="addResButtonMode">
+        Props
+      </base-button>
+      <base-button
+      type="default"
+      size="mini"
+      @click="setSelectedTab('sibling-component')"
+      :mode="addResButtonMode">
+       Sibling Component
+      </base-button>
     </base-card>
     <keep-alive>
       <component :is="selectedTab"></component>
@@ -24,12 +38,16 @@
 <script>
 import ResourcesLists from './ResourcesLists';
 import ResourceForm from './ResourceForm';
+import PropsParent from './PropsParent'
 import BaseButton from './BaseButton';
 import BaseCard from './BaseCard'
+import SiblingComponent from './SiblingComponentCommunnication'
 export default {
   components: {
     ResourceForm,
     ResourcesLists,
+    PropsParent,
+    SiblingComponent,
     BaseButton,
     BaseCard
   },

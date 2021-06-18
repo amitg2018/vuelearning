@@ -10,7 +10,21 @@
         <a :href="link" target="_blank">View Resource</a>
       </nav>
       {{num}}
+
+     
+      
       <check-provide-inject></check-provide-inject>
+      
+      <emit-from-child 
+        @changeMsg="setMessage" 
+        :msg="welcomeMsg"
+        @valueChanger="toggleValue"
+        :switchCondition="changeSwitchValue">
+      </emit-from-child>
+      <!-- <emit-from-child 
+        :msg="welcomeMsg"
+        :switchCondition="changeSwitchValue">
+      </emit-from-child> -->
     </base-card>
   </li>
 </template>
@@ -19,11 +33,14 @@
 import BaseCard from './BaseCard'
 import BaseButton from './BaseButton'
 import CheckProvideInject from './CheckProvideInject'
+import EmitFromChild from './EmitFromChild'
+// import {appBus} from '../../../main'
 export default {
   components: {
     BaseCard,
     BaseButton,
-    CheckProvideInject
+    CheckProvideInject,
+    EmitFromChild
   },
   props: ['id', 'title', 'description', 'link'],
   // props: {
@@ -46,18 +63,34 @@ export default {
   // },
   data() {
     return {
-      num: 0
+      num: 0,
+      welcomeMsg: "Hello World",
+      changeSwitchValue:"Accuracy"
     }
   },
   inject: ['deleteResource'],
   provide() {
     return {
-      information: this.info
+      information: this.info,
+      // messsageFlow: this.setMessage,
+      // switchValueToogle: this.toggleValue
     }
+  },
+  created() {
+      // appBus.$on("valueChanger", (val) => {
+      //   !val ? this.changeSwitchValue = 'Accuracy' : this.changeSwitchValue = 'Coverage'
+      // });
+      // appBus.$on("changeMsg", val => this.welcomeMsg = val);
   },
   methods: {
     info () {
       this.num++
+    },
+    setMessage(val) {
+      this.welcomeMsg = val;
+    },
+    toggleValue(val) {
+      val ? this.changeSwitchValue = 'Coverage' : this.changeSwitchValue = 'Accuracy'
     }
   }
 }
