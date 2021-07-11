@@ -4,11 +4,12 @@
       <!-- <router-link :to="{name: 'Home', params: {id: 123}}">Home</router-link> | -->
       <!-- <router-link :to="{name: 'Home'}" class="active">Home</router-link> | -->
       <router-link to="/home">Home</router-link> |
-      <router-link to="/about">About</router-link> | 
+      <router-link to="/about">About</router-link> |
       <router-link to="/apiCall">API Call</router-link> |
       <router-link to="/components">Component</router-link> |
-      <router-link to="/vuex">Vuex</router-link> | 
-      <router-link to="/udemy">Udemy</router-link>
+      <router-link to="/vuex">Vuex</router-link> |
+      <router-link to="/udemy">Udemy</router-link> |
+      <router-link to="/vuexMonday">Monday Vuex</router-link>
     </div>
     <router-view></router-view>
 
@@ -33,12 +34,13 @@
   font-weight: bold;
   color: #2c3e50;
 }
-#nav a.active
-{ color: #42b983;}
+#nav a.active {
+  color: #42b983;
+}
 
 // .router-link-exact-active {
 //   color: #42b983;
-// } 
+// }
 a.router-link-active {
   color: #42b983;
 }

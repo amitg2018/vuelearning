@@ -1,6 +1,9 @@
 <template>
   <div>
-    <div class="card m-2" style="display: flex; flex-direction: column; gap: 20px;">
+    <div
+      class="card m-2"
+      style="display: flex; flex-direction: column; gap: 20px"
+    >
       <div class="card-body">
         <h4 class="card-title" v-text="thecardtitle"></h4>
         <button
@@ -11,8 +14,14 @@
           Mom says stop fighting Childs!
         </button>
         <div class="d-flex justify-content-center">
-          <brother-card :messageson="messageson" @brothersaid="messageDaughter($event)"></brother-card>
-          <sister-card :messagedaughter="messagedaughter" @sistersaid="messageSon($event)"></sister-card>
+          <brother-card
+            :messageson="messageson"
+            @brothersaid="messageDaughter($event)"
+          ></brother-card>
+          <sister-card
+            :messagedaughter="messagedaughter"
+            @sistersaid="messageSon($event)"
+          ></sister-card>
         </div>
       </div>
 
@@ -35,21 +44,21 @@
 </template>
 
 <script>
-import BrotherCard from './BrotherCard';
-import BrotherCardAppBus from './BrotherCardAppBus.vue';
-import SisterCard from './SisterCard';
-import SisterCardAppBus from './SisterCardAppBus.vue';
+import BrotherCard from "./BrotherCard";
+import BrotherCardAppBus from "./BrotherCardAppBus.vue";
+import SisterCard from "./SisterCard";
+import SisterCardAppBus from "./SisterCardAppBus.vue";
 
 export default {
-  components: { BrotherCard, SisterCard, BrotherCardAppBus, SisterCardAppBus},
+  components: { BrotherCard, SisterCard, BrotherCardAppBus, SisterCardAppBus },
 
   data() {
     return {
-      thecardtitle: 'Parent Component!',
-      thecardtitle2: 'Parent Component AppBus!',
-      messagedaughter: '',
-      messageson: ''
-    }
+      thecardtitle: "Parent Component!",
+      thecardtitle2: "Parent Component AppBus!",
+      messagedaughter: "",
+      messageson: "",
+    };
   },
 
   methods: {
@@ -69,27 +78,27 @@ export default {
     },
 
     momSaidChill() {
-      this.messagedaughter = '';
-      this.messageson = '';
-    }
-  }
-}
+      this.messagedaughter = "";
+      this.messageson = "";
+    },
+  },
+};
 </script>
 
 <style scoped>
-  div.card {
-    color: #721c24;
-    border: 4px solid #f5c6cb;
-  }
-  .d-flex {
-    display: flex;
-  }
-  .m-2 {
-    width: 40rem;
-    padding: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 auto;
-  }
+div.card {
+  color: #721c24;
+  border: 4px solid #f5c6cb;
+}
+.d-flex {
+  display: flex;
+}
+.m-2 {
+  width: 40rem;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
 </style>
