@@ -1,4 +1,3 @@
-import axios from "axios";
 export default {
   incrementAction(context) {
     setTimeout(function () {
@@ -21,12 +20,5 @@ export default {
   },
   logout(context) {
     context.commit("setAuth", { isAuth: false });
-  },
-  async fetchTodos({ commit }) {
-    const response = await axios.get(
-      "https://jsonplaceholder.typicode.com/todos"
-    );
-    // console.log(response.data);
-    commit("setTodos", response.data);
   },
 };

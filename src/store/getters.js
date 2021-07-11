@@ -25,7 +25,4 @@ export default {
   userIsAuthenticated(state) {
     return state.isloggedin;
   },
-  allTodos(state) {
-    return state.todos;
-  },
 };

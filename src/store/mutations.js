@@ -24,8 +24,4 @@ export default {
   increase(state, payload) {
     state.counter = state.counter + payload.value;
   },
-
-  setTodos(state, todos) {
-    return (state.todos = todos);
-  },
 };
