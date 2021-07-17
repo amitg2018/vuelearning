@@ -1,11 +1,27 @@
+<!-- source: https://www.youtube.com/watch?v=5lVQgZzLMHc&t=138s -->
 <template>
   <div>
-    <h3>{{ name }}</h3>
+    <div class="">
+      <h1>Double click on card</h1>
+      <div><span class="complete-box"> </span> = Complete</div>
+      <div><span class="incomplete-box"></span> = Incomplete</div>
+    </div>
+    <h3>{{ name }} - {{ counts }}</h3>
     <div class="all-items">
-      <div class="item" v-for="todo in allTodos" :key="todo.id">
+      <div
+        @dblclick="onDblClick(todo)"
+        class="item"
+        v-for="todo in allTodos"
+        :key="todo.id"
+        :class="{ 'is-complete': todo.completed }"
+      >
         {{ todo.id }}{{ todo.title }}
         <span @click="deleteTodo(todo.id)">X</span>
       </div>
+    </div>
+
+    <div v-for="product in products" :key="product.id">
+      {{ product.name }} {{ product.year }}
     </div>
   </div>
 </template>
@@ -19,12 +35,24 @@ export default {
   },
   computed: {
     ...mapGetters(["allTodos"]),
+    // is tarah bhi use ker sakte hai aur abouve ...mapGetters main bhi ...mapGetters(["allTodos","allProdcuts"])
+    products() {
+      return this.$store.getters.allProdcuts;
+    },
   },
   created() {
     this.fetchTodos();
   },
   methods: {
-    ...mapActions(["fetchTodos", "deleteTodo"]),
+    ...mapActions(["fetchTodos", "deleteTodo", "updateTodo"]),
+    onDblClick(todo) {
+      const updTodo = {
+        id: todo.id,
+        title: todo.title,
+        completed: !todo.completed,
+      };
+      this.updateTodo(updTodo);
+    },
   },
 };
 </script>
@@ -37,6 +65,7 @@ export default {
     border: 1px solid #e2e2e2;
     padding: 5px 10px;
     position: relative;
+    background: green;
     width: 20%;
     span {
       position: absolute;
@@ -64,5 +93,21 @@ export default {
       }
     }
   }
+}
+.complete-box {
+  background: rgb(0, 0, 0);
+  width: 10px;
+  height: 10px;
+  display: inline-block;
+}
+.incomplete-box {
+  background: green;
+  width: 10px;
+  height: 10px;
+  display: inline-block;
+}
+.is-complete {
+  background: #000 !important;
+  color: #fff;
 }
 </style>

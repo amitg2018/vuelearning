@@ -21,4 +21,22 @@ export default {
     await axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`);
     commit("removeTodo", id);
   },
+  async filterTodos({ commit }, e) {
+    const limit = parseInt(
+      e.target.options[e.target.options.selectedIndex].innerText
+    );
+    const response = await axios.get(
+      `https://jsonplaceholder.typicode.com/todos?_limit=${limit}`
+    );
+    // console.log(response.data);
+    commit("setTodos", response.data);
+  },
+  async updateTodo({ commit }, updTodo) {
+    const response = await axios.put(
+      `https://jsonplaceholder.typicode.com/todos/${updTodo.id}`,
+      updTodo
+    );
+    console.log(response);
+    commit("updateTodo", response.data);
+  },
 };
